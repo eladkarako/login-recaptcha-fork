@@ -1,7 +1,7 @@
 <?php
-if (!is_admin()) {
-    die();
-}
+
+ if (false === is_admin()) die(); 
+
 ?><div class="wrap">
 <h2><?php _e('Login NoCaptcha Options','login_nocaptcha'); ?></h2>
 <form method="post" action="options.php">
@@ -47,14 +47,15 @@ echo settings_fields( 'login_nocaptcha' );
 <?php endif; ?>
 </div>
 <script>
-(function($) {
-    $('#reset').on('click', function(e) {
-        e.preventDefault();
-        $('#id_login_nocaptcha_key').val('');
-        $('#id_login_nocaptcha_secret').val('');
-        $('#submit').trigger('click');
-    });
-})(jQuery);
+document.querySelector('#reset').onclick = function(ev){
+  ev.preventDefault();
+
+  document.querySelector('#id_login_nocaptcha_key').value    = "";
+  document.querySelector('#id_login_nocaptcha_secret').value = "";
+  document.querySelector('#submit').click();
+
+  return false; //equivalent of 'ev.preventDefault' for IE
+};
 </script>
 <style>
     #submit + #reset {
